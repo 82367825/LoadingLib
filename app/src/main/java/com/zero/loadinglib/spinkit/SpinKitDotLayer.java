@@ -16,7 +16,8 @@ public class SpinKitDotLayer extends AbsAnimLayer {
     }
 
     @Override
-    protected void onDrawLayer(Canvas canvas, float scaleSize) {
-
+    protected void onDrawLayer(Canvas canvas, float percent, float scaleSize) {
+        
     }
+
 }
