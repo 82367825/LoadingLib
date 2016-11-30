@@ -1,10 +1,10 @@
 # LoadingLib
 
-这是一个开源的动画库，动画框架改自另一个开源库，我对其中做了一些修改，在绘制更加复杂的动画的时候，结构更加清晰。<br>
+这是一个开源的动画库，动画框架改自另一个开源库，我对其中做了一些修改，添加了绘制图层的概念，在绘制更加复杂的动画的时候，结构更加清晰。<br>
 同时，首次通过JitPack来发布开源项目，这个仓库的使用还是很方便的，如何通过JitPack发布开源项目：
 https://github.com/GcsSloop/AndroidNote/blob/master/Course/ReleaseLibraryByJitPack.md
 
-## 如何使用
+## 如何导入库
 ###gradle版本
 Step 1. Add the JitPack repository to your build file
 Add it in your root build.gradle at the end of repositories:
