@@ -10,17 +10,14 @@ import com.zero.loadinglib.AbsAnimLayer;
  */
 public class SpinKitBounceLayer extends AbsAnimLayer {
 
-    
 
     @Override
-    protected void onMeasureLayer(int designWidth, int designHeight, 
-                                  int realWidth, int realHeight) {
+    protected void onMeasureLayer(int realWidth, int realHeight) {
         
     }
 
     @Override
-    protected void onDrawLayer(Canvas canvas, float percent, float scaleSize) {
-        
+    protected void onDrawLayer(Canvas canvas, float percent) {
+
     }
-    
 }

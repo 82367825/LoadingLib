@@ -44,9 +44,8 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
     
     @Override
     public void draw(Canvas canvas) {
-        float scaleSize = mDrawableRealWidth / mDrawableDesignHeight;
         for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
-            absAnimLayer.onDrawLayer(canvas, mCurrentPercent, scaleSize);
+            absAnimLayer.onDrawLayer(canvas, mCurrentPercent);
         }
     }
     
@@ -136,8 +135,7 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
         if (mDrawableRealWidth != bounds.width() ||
                 mDrawableRealHeight != bounds.height()) {
             for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
-                absAnimLayer.onMeasureLayer((int)mDrawableDesignWidth, (int)mDrawableDesignHeight, 
-                        (int)mDrawableRealWidth, (int) mDrawableRealHeight);
+                absAnimLayer.onMeasureLayer((int)mDrawableRealWidth, (int) mDrawableRealHeight);
             }
         }
         mDrawableRealWidth = bounds.width();

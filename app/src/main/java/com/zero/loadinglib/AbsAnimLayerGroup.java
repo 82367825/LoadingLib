@@ -18,16 +18,16 @@ public abstract class AbsAnimLayerGroup extends AbsAnimLayer {
     }
 
     @Override
-    protected void onMeasureLayer(int designWidth, int designHeight, int realWidth, int realHeight) {
+    protected void onMeasureLayer(int realWidth, int realHeight) {
         for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
-            absAnimLayer.onMeasureLayer(designWidth, designHeight, realWidth, realHeight);
+            absAnimLayer.onMeasureLayer(realWidth, realHeight);
         }
     }
 
     @Override
-    protected void onDrawLayer(Canvas canvas, float percent, float scaleSize) {
+    protected void onDrawLayer(Canvas canvas, float percent) {
         for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
-            absAnimLayer.onDrawLayer(canvas, percent, scaleSize);
+            absAnimLayer.onDrawLayer(canvas, percent);
         }
     }
 }

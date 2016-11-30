@@ -2,6 +2,7 @@ package com.zero.loadinglib.spinkit;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 
 import com.zero.loadinglib.AbsAnimLayer;
 
@@ -14,7 +15,7 @@ public class SpinKitSoundLayer extends AbsAnimLayer {
     private static final float STATUS_PERCENT_CLAM = 0.2f;
     private static final float STATUS_PERCENT_BEAT = 0.8f;
     private static final int DEFAULT_COLOR = 0xFF808080;
-    private static final int DEFAULT_STRIP_NUMBER = 5;
+    private static final int DEFAULT_STRIP_NUMBER = 4;
     private static final int DEFAULT_STRIP_WIDTH = 15;
     private static final int DEFAULT_STRIP_INTERVAL = 10;
     private static final int DEFAULT_STRIP_MIN_LENGTH = 35;
@@ -28,24 +29,29 @@ public class SpinKitSoundLayer extends AbsAnimLayer {
     private int mStripMinLength = DEFAULT_STRIP_MIN_LENGTH;
     private int mStripMaxLength = DEFAULT_STRIP_MAX_LENGTH;
     
-    private int mStripLengths[];
+    private PointF[] mStripCenterPoint;
+    
+    
     
     public SpinKitSoundLayer() {
         mPaint = new Paint();
         mPaint.setColor(mColor);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
-        mStripLengths = new int[mStripNumber];
+        mStripCenterPoint = new PointF[mStripNumber];
     }
-    
+
+
     @Override
-    protected void onMeasureLayer(int designWidth, int designHeight, 
-                                  int realWidth, int realHeight) {
-        //do nothing
+    protected void onMeasureLayer(int realWidth, int realHeight) {
+        mStripMaxLength = (int) (scaleSize * mStripMaxLength);
+        mStripMinLength = (int) (scaleSize * mStripMinLength);
+        mStripWidth = (int) (scaleSize * mStripWidth);
+        mStripInterval = (int) (scaleSize * mStripInterval);
     }
 
     @Override
-    protected void onDrawLayer(Canvas canvas, float percent, float scaleSize) {
+    protected void onDrawLayer(Canvas canvas, float percent) {
         if (percent <= STATUS_PERCENT_CLAM) {
             
         } else if (percent > STATUS_PERCENT_CLAM && percent < STATUS_PERCENT_BEAT) {
@@ -54,4 +60,13 @@ public class SpinKitSoundLayer extends AbsAnimLayer {
             
         }
     }
+    
+    private void drawClamSound(Canvas canvas) {
+        
+    }
+    
+    private void drawBeatSound(Canvas canvas) {
+        
+    }
+    
 }
