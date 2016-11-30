@@ -3,8 +3,8 @@ package com.zero.loadinglib;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+
 import java.util.List;
 
 
@@ -29,14 +29,9 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
     private float mDrawableDesignWidth;
     /* Drawable设计图上的高度 Drawable内部高度 */
     private float mDrawableDesignHeight;
-    /* Drawable实际绘制出来的宽度 */
-    private float mDrawableRealWidth;
-    /* Drawable实际绘制出来的高度 */
-    private float mDrawableRealHeight;
     
     private float mDrawableAlpha; 
     private ColorFilter mColorFilter;
-    private Rect mDrawableBound;
     
     public AnimDrawable() {
         initAnimDrawable();
@@ -44,6 +39,9 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
     
     @Override
     public void draw(Canvas canvas) {
+        if (mDrawableDesignWidth == 0 || mDrawableDesignHeight == 0) {
+            return ;
+        }
         for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
             absAnimLayer.onDrawLayer(canvas, mCurrentPercent);
         }
@@ -62,6 +60,10 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
             mDrawableDesignHeight = DEFAULT_DRAWABLE_HEIGHT;
         }
         mDrawableAlpha = DEFAULT_DRAWABLE_ALPHA;
+
+        for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
+            absAnimLayer.onMeasureLayer((int)mDrawableDesignWidth, (int) mDrawableDesignHeight);
+        }
     }
 
     /**
@@ -123,32 +125,7 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
     public void setColorFilter(ColorFilter colorFilter) {
         this.mColorFilter = colorFilter;
     }
-
-    /**
-     * 设定当draw()方法调用时,绘制图形的矩形区域 即View的实际大小
-     * Specify a bounding rectangle for the Drawable. This is where the drawable
-     * will draw when its draw() method is called.
-     */
-    @Override
-    public void setBounds(Rect bounds) {
-        this.mDrawableBound.set(bounds);
-        if (mDrawableRealWidth != bounds.width() ||
-                mDrawableRealHeight != bounds.height()) {
-            for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
-                absAnimLayer.onMeasureLayer((int)mDrawableRealWidth, (int) mDrawableRealHeight);
-            }
-        }
-        mDrawableRealWidth = bounds.width();
-        mDrawableRealHeight = bounds.height();
-    }
     
-    @Override
-    protected void onBoundsChange(Rect bounds) {
-        this.mDrawableBound.set(bounds);
-        mDrawableRealWidth = bounds.width();
-        mDrawableRealHeight = bounds.height();
-    }
-
     /* 当View设置为wrap_content时获取宽度值 */
     @Override
     public int getIntrinsicWidth() {

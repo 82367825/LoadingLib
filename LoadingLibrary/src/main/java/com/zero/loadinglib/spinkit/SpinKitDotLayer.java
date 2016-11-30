@@ -10,6 +10,7 @@ import com.zero.loadinglib.AbsAnimLayer;
  */
 public class SpinKitDotLayer extends AbsAnimLayer {
     
+
     @Override
     protected void onMeasureLayer(int realWidth, int realHeight) {
         

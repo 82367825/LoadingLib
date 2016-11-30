@@ -16,11 +16,12 @@ public abstract class AbsAnimLayerGroup extends AbsAnimLayer {
     public AbsAnimLayerGroup() {
         mAbsAnimLayers = new ArrayList<AbsAnimLayer>();
     }
+    
 
     @Override
-    protected void onMeasureLayer(int realWidth, int realHeight) {
+    protected void onMeasureLayer(int designWidth, int designHeight) {
         for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
-            absAnimLayer.onMeasureLayer(realWidth, realHeight);
+            absAnimLayer.onMeasureLayer(designWidth, designHeight);
         }
     }
 

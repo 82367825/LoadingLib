@@ -7,14 +7,14 @@ import android.graphics.Canvas;
  * @date 2016/11/27
  */
 public abstract class AbsAnimLayer {
-
+    
     /**
      * 绘制动画层大小
-     * <br><strong>NOTE:</strong> 当尺寸发生变化的时候调用      
-     * @param realWidth 实际宽度
-     * @param realHeight 实际高度
+     * <br><strong>NOTE:</strong>   
+     * @param designWidth Drawable内部宽度
+     * @param designHeight Drawable内部高度
      */
-    protected abstract void onMeasureLayer(int realWidth, int realHeight);
+    protected abstract void onMeasureLayer(int designWidth, int designHeight);
 
     /**
      * 绘制动画层
