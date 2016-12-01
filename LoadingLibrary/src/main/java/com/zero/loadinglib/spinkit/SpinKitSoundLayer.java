@@ -49,20 +49,20 @@ public class SpinKitSoundLayer extends AbsAnimLayer {
     }
 
     @Override
-    protected void onMeasureLayer(int realWidth, int realHeight) {
-        mStripMaxLength = (int) (0.2f * realHeight);
-        mStripMinLength = (int) (0.12f * realHeight);
-        mStripWidth = (int) (0.05f * realWidth);
+    protected void onMeasureLayer(int designWidth, int designHeight) {
+        mStripMaxLength = (int) (0.2f * designHeight);
+        mStripMinLength = (int) (0.12f * designHeight);
+        mStripWidth = (int) (0.05f * designWidth);
         mStripInterval = (int) (2f * mStripWidth);
 
         float animRunningTime = 1 - STATUS_PERCENT_CLAM;
         float animRunningInterval = animRunningTime / ((mStripNumber + 1) / 2);
 
-        mStripLeftPadding = mStripRightPadding = (realWidth - mStripInterval * (mStripNumber - 1)) / 2;
+        mStripLeftPadding = mStripRightPadding = (designWidth - mStripInterval * (mStripNumber - 1)) / 2;
         for (int i = 0; i < mStripCenterPoint.length; i++) {
             mStripCenterPoint[i] = new Point();
             mStripCenterPoint[i].x = mStripLeftPadding + i * mStripInterval;
-            mStripCenterPoint[i].y = realHeight / 2;
+            mStripCenterPoint[i].y = designHeight / 2;
             mStripLengths[i] = mStripMinLength;
             mStripEvaluators[i] = new StripEvaluator(STATUS_PERCENT_CLAM + animRunningInterval * i, STATUS_PERCENT_CLAM + animRunningInterval * (i + 2));
         }
@@ -79,7 +79,8 @@ public class SpinKitSoundLayer extends AbsAnimLayer {
 
     private void drawClamSound(Canvas canvas) {
         for (int i = 0; i < mStripCenterPoint.length; i++) {
-            Rect rect = new Rect(mStripCenterPoint[i].x - mStripWidth / 2, mStripCenterPoint[i].y - mStripLengths[i] / 2, mStripCenterPoint[i].x + mStripWidth / 2, mStripCenterPoint[i].y + mStripLengths[i] / 2);
+            Rect rect = new Rect(mStripCenterPoint[i].x - mStripWidth / 2, 
+                    mStripCenterPoint[i].y - mStripLengths[i] / 2, mStripCenterPoint[i].x + mStripWidth / 2, mStripCenterPoint[i].y + mStripLengths[i] / 2);
             canvas.drawRect(rect, mPaint);
         }
     }
@@ -87,7 +88,8 @@ public class SpinKitSoundLayer extends AbsAnimLayer {
     private void drawBeatSound(Canvas canvas, float percent) {
         for (int i = 0; i < mStripCenterPoint.length; i++) {
             mStripLengths[i] = mStripEvaluators[i].evaluate(percent, mStripMinLength, mStripMaxLength);
-            Rect rect = new Rect(mStripCenterPoint[i].x - mStripWidth / 2, mStripCenterPoint[i].y - mStripLengths[i] / 2, mStripCenterPoint[i].x + mStripWidth / 2, mStripCenterPoint[i].y + mStripLengths[i] / 2);
+            Rect rect = new Rect(mStripCenterPoint[i].x - mStripWidth / 2, 
+                    mStripCenterPoint[i].y - mStripLengths[i] / 2, mStripCenterPoint[i].x + mStripWidth / 2, mStripCenterPoint[i].y + mStripLengths[i] / 2);
             canvas.drawRect(rect, mPaint);
         }
     }

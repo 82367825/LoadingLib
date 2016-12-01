@@ -9,10 +9,10 @@ import com.zero.loadinglib.AbsAnimLayer;
  * @date 2016/11/27
  */
 public class SpinKitDotLayer extends AbsAnimLayer {
-    
+
 
     @Override
-    protected void onMeasureLayer(int realWidth, int realHeight) {
+    protected void onMeasureLayer(int designWidth, int designHeight) {
         
     }
 
