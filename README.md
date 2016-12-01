@@ -1,6 +1,6 @@
 # LoadingLib
 
-这是一个开源的动画库，动画框架改自另一个开源库，我对其中做了一些修改，添加了绘制图层的概念，在绘制更加复杂的动画的时候，结构更加清晰。<br>
+这是一个开源的动画库，动画框架思路是平时看很多开发者的源代码总结的，添加了绘制图层的概念，在绘制更加复杂的动画的时候，结构更加清晰。<br>
 同时，首次通过JitPack来发布开源项目，这个仓库的使用还是很方便的，如何通过JitPack发布开源项目：
 https://github.com/GcsSloop/AndroidNote/blob/master/Course/ReleaseLibraryByJitPack.md
 
