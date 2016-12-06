@@ -10,6 +10,7 @@ import com.zero.loadinglib.AbsAnimLayer;
 import com.zero.loadinglib.util.IntermittentInterpolator;
 
 /**
+ * 两个矩阵旋转
  * @author linzewu
  * @date 2016/11/27
  */
