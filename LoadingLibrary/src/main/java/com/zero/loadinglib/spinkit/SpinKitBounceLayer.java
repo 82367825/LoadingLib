@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.view.animation.Interpolator;
+import android.util.Log;
 
 import com.zero.loadinglib.AbsAnimLayer;
 import com.zero.loadinglib.util.IntermittentInterpolator;
@@ -50,10 +50,10 @@ public class SpinKitBounceLayer extends AbsAnimLayer {
         mBounceSizeEvaluator = new BounceSizeEvaluator();
         mBounceRotateEvaluator = new BounceRotateEvaluator();
         mIntermittentInterpolator = new IntermittentInterpolator();
-        mBounceLeftPoint = new Point((int)(0.3f * designWidth), (int)(0.4f * designHeight));
-        mBounceRightPoint = new Point((int)(0.7f * designWidth), (int)(0.6f * designHeight));
-        mBounceMaxSideLength = (int) (0.08f * designWidth);
-        mBounceMinSideLength = (int) (0.03f * designWidth);
+        mBounceLeftPoint = new Point((int)(0.4f * designWidth), (int)(0.4f * designHeight));
+        mBounceRightPoint = new Point((int)(0.6f * designWidth), (int)(0.6f * designHeight));
+        mBounceMaxSideLength = (int) (0.12f * designWidth);
+        mBounceMinSideLength = (int) (0.04f * designWidth);
         mMovingSquareRect1 = new Rect();
         mMovingSquareRect2 = new Rect();
     }
@@ -81,6 +81,7 @@ public class SpinKitBounceLayer extends AbsAnimLayer {
         canvas.rotate(rotate, mMovingPoint1.x, mMovingPoint1.y);
         canvas.drawRect(mMovingSquareRect1, mPaint);
         canvas.restoreToCount(saveLayer);
+        
         saveLayer = canvas.save();
         canvas.rotate(rotate, mMovingPoint2.x, mMovingPoint2.y);
         canvas.drawRect(mMovingSquareRect2, mPaint);

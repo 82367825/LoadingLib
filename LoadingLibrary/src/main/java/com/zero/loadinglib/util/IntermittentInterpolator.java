@@ -17,13 +17,13 @@ public class IntermittentInterpolator implements Interpolator {
     
     @Override
     public float getInterpolation(float input) {
-        if (input >= FIRST_INTERMITTENT_FRACTION && input < FIRST_INTERMITTENT_RECOVER_FRACTION) {
+        if (input >= FIRST_INTERMITTENT_FRACTION && input <= FIRST_INTERMITTENT_RECOVER_FRACTION) {
             return 0f;
-        } else if (input > FIRST_INTERMITTENT_RECOVER_FRACTION && input < 
+        } else if (input > FIRST_INTERMITTENT_RECOVER_FRACTION && input <= 
                 SECOND_INTERMITTENT_FRACTION) {
             return (input - FIRST_INTERMITTENT_RECOVER_FRACTION) / 
                     (2 * (0.5f - FIRST_INTERMITTENT_RECOVER_FRACTION)); 
-        } else if (input > SECOND_INTERMITTENT_FRACTION && input < 
+        } else if (input > SECOND_INTERMITTENT_FRACTION && input <= 
                 SECOND_INTERMITTENT_RECOVER_FRACTION) {
             return 0.5f;
         } else {

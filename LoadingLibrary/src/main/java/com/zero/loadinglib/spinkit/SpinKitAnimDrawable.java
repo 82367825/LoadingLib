@@ -13,7 +13,7 @@ import java.util.List;
 public class SpinKitAnimDrawable extends AnimDrawable {
     
     private static final int DRAWABLE_DESIGN_WIDTH = 768;
-    private static final int DRAWABLE_DESIGN_HEIGHT = 1280;
+    private static final int DRAWABLE_DESIGN_HEIGHT = 768;
     private static final long ANIM_DURATION = 500;
     
     public static final int TYPE_BOUNCE = 1;
