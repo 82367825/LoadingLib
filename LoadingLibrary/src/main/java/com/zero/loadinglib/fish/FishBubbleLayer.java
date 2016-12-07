@@ -1,4 +1,4 @@
-package com.zero.loadinglib.spinkit;
+package com.zero.loadinglib.fish;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -6,18 +6,12 @@ import android.graphics.Point;
 import com.zero.loadinglib.AbsAnimLayer;
 
 /**
- * 
+ * 鱼吐气动画层
  * @author linzewu
- * @date 16-12-6
+ * @date 16-12-7
  */
-public class SpinKitLightCircleLayer extends AbsAnimLayer {
+public class FishBubbleLayer extends AbsAnimLayer {
     
-    private int mColor;
-    
-    private Point mCenterPoint;
-    private int mOuterCircleRadius;
-    private int mInnerCircleMaxRadius;
-    private int mInnerCircleMinRadius;
     
     
     @Override
@@ -29,4 +23,14 @@ public class SpinKitLightCircleLayer extends AbsAnimLayer {
     protected void onDrawLayer(Canvas canvas, float percent) {
 
     }
+    
+    private class FishBubble {
+        private Point mBubblePoint;
+        private int mBubbleRadius;
+        
+        public FishBubble() {
+            
+        }
+    }
+    
 }

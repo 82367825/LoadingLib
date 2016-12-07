@@ -26,7 +26,7 @@ public class SpinKitAnimDrawable extends AnimDrawable {
     @Override
     protected List<AbsAnimLayer> getAnimLayer() {
         List<AbsAnimLayer> absAnimLayers = new ArrayList<AbsAnimLayer>();
-        absAnimLayers.add(new SpinKitBounceLayer());
+        absAnimLayers.add(new SpinKitFlashCircleLayer());
         return absAnimLayers;
     }
 
