@@ -1,13 +1,17 @@
 package com.zero.loadinglib.spinkit;
 
-import android.animation.TypeEvaluator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
 import com.zero.loadinglib.AbsAnimLayer;
-import com.zero.loadinglib.util.IntermittentInterpolator;
+import com.zero.loadinglib.util.evaluator.RotateEvaluator;
+import com.zero.loadinglib.util.evaluator.SizeEvaluator;
+import com.zero.loadinglib.util.evaluator.TransRightAngleEvaluator;
+import com.zero.loadinglib.util.interpolator.IntermittentInterpolator;
+import com.zero.loadinglib.util.interpolator.RepeatInterpolator;
+import com.zero.loadinglib.util.interpolator.ReverseInterpolator;
 
 /**
  * 两个矩阵旋转
@@ -33,10 +37,13 @@ public class SpinKitBounceLayer extends AbsAnimLayer {
     private Rect mMovingSquareRect2;
     private Paint mPaint;
     
-    private BouncePointEvaluator mBouncePointEvaluator;
-    private BounceSizeEvaluator mBounceSizeEvaluator;
-    private BounceRotateEvaluator mBounceRotateEvaluator;
+    private TransRightAngleEvaluator mTransRightAngleEvaluator;
+    private SizeEvaluator mSizeEvaluator;
+    private RotateEvaluator mRotateEvaluator;
+    
     private IntermittentInterpolator mIntermittentInterpolator;
+    private RepeatInterpolator mRepeatInterpolator;
+    private ReverseInterpolator mReverseInterpolator;
     
     public SpinKitBounceLayer() {
         mPaint = new Paint();
@@ -46,10 +53,12 @@ public class SpinKitBounceLayer extends AbsAnimLayer {
     
     @Override
     protected void onMeasureLayer(int designWidth, int designHeight) {
-        mBouncePointEvaluator = new BouncePointEvaluator();
-        mBounceSizeEvaluator = new BounceSizeEvaluator();
-        mBounceRotateEvaluator = new BounceRotateEvaluator();
+        mTransRightAngleEvaluator = new TransRightAngleEvaluator();
+        mSizeEvaluator = new SizeEvaluator();
+        mRotateEvaluator = new RotateEvaluator();
         mIntermittentInterpolator = new IntermittentInterpolator();
+        mRepeatInterpolator = new RepeatInterpolator();
+        mReverseInterpolator = new ReverseInterpolator();
         mBounceLeftPoint = new Point((int)(0.4f * designWidth), (int)(0.4f * designHeight));
         mBounceRightPoint = new Point((int)(0.6f * designWidth), (int)(0.6f * designHeight));
         mBounceMaxSideLength = (int) (0.12f * designWidth);
@@ -61,12 +70,12 @@ public class SpinKitBounceLayer extends AbsAnimLayer {
     @Override
     protected void onDrawLayer(Canvas canvas, float percent) {
         float animPercent = mIntermittentInterpolator.getInterpolation(percent);
-        mMovingPoint1 = mBouncePointEvaluator.evaluate(animPercent, mBounceLeftPoint, mBounceRightPoint);
-        mMovingPoint2 = mBouncePointEvaluator.evaluate(animPercent, mBounceRightPoint, mBounceLeftPoint);
-        mMovingSquareSize1 = mBounceSizeEvaluator.evaluate(animPercent, mBounceMaxSideLength, 
-                mBounceMinSideLength);
-        mMovingSquareSize2 = mBounceSizeEvaluator.evaluate(animPercent, mBounceMaxSideLength,
-                mBounceMinSideLength);
+        mMovingPoint1 = mTransRightAngleEvaluator.evaluate(animPercent, mBounceLeftPoint, mBounceRightPoint);
+        mMovingPoint2 = mTransRightAngleEvaluator.evaluate(animPercent, mBounceRightPoint, mBounceLeftPoint);
+        mMovingSquareSize1 = mSizeEvaluator.evaluate(mReverseInterpolator.getInterpolation(animPercent), 
+                mBounceMaxSideLength, mBounceMinSideLength);
+        mMovingSquareSize2 = mSizeEvaluator.evaluate(mReverseInterpolator.getInterpolation(animPercent), 
+                mBounceMaxSideLength, mBounceMinSideLength);
         mMovingSquareRect1.left = mMovingPoint1.x - mMovingSquareSize1 / 2;
         mMovingSquareRect1.right = mMovingPoint1.x + mMovingSquareSize1 / 2;
         mMovingSquareRect1.top = mMovingPoint1.y - mMovingSquareSize1 / 2;
@@ -76,60 +85,18 @@ public class SpinKitBounceLayer extends AbsAnimLayer {
         mMovingSquareRect2.top = mMovingPoint2.y - mMovingSquareSize2 / 2;
         mMovingSquareRect2.bottom = mMovingPoint2.y + mMovingSquareSize2 / 2;
         
-        float rotate1 = mBounceRotateEvaluator.evaluate(animPercent, 90, -90);
+        float rotate1 = mRotateEvaluator.evaluate(mRepeatInterpolator.getInterpolation(animPercent), 
+                90, -90);
         int saveLayer = canvas.save();
         canvas.rotate(rotate1, mMovingPoint1.x, mMovingPoint1.y);
         canvas.drawRect(mMovingSquareRect1, mPaint);
         canvas.restoreToCount(saveLayer);
         
-        float rotate2 = mBounceRotateEvaluator.evaluate(animPercent, -90, 90);
+        float rotate2 = mRotateEvaluator.evaluate(mRepeatInterpolator.getInterpolation(animPercent), 
+                -90, 90);
         saveLayer = canvas.save();
         canvas.rotate(rotate2, mMovingPoint2.x, mMovingPoint2.y);
         canvas.drawRect(mMovingSquareRect2, mPaint);
         canvas.restoreToCount(saveLayer);
-    }
-    
-    
-    private class BounceRotateEvaluator implements TypeEvaluator<Integer> {
-
-        @Override
-        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-            if (fraction <= 0.5f) {
-                return (int)(fraction * 2 * (endValue - startValue));
-            } else {
-                return (int)((fraction - 0.5f) * 2 * (endValue - startValue));
-            }
-        }
-    }
-    
-    private class BounceSizeEvaluator implements TypeEvaluator<Integer> {
-
-        @Override
-        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-            if (fraction <= 0.5f) {
-                return (int)(startValue + fraction * 2 * (endValue - startValue));
-            } else {
-                return (int)(endValue + (fraction - 0.5) * 2 * (startValue - endValue));
-            }
-        }
-    }
-    
-    
-    private class BouncePointEvaluator implements TypeEvaluator<Point> {
-        
-        @Override
-        public Point evaluate(float fraction, Point startValue, Point endValue) {
-            //中间点坐标
-            Point pausePoint = new Point(endValue.x, startValue.y);
-            if (fraction <= 0.5f) {
-                float percent = fraction / 0.5f;
-                int currentX = (int)(startValue.x + (pausePoint.x - startValue.x) * percent);
-                return new Point(currentX, startValue.y);
-            } else {
-                float percent = (fraction - 0.5f) / 0.5f;
-                int currentY = (int)(pausePoint.y + (endValue.y - pausePoint.y) * percent);
-                return new Point(pausePoint.x, currentY);
-            }
-        }
     }
 }

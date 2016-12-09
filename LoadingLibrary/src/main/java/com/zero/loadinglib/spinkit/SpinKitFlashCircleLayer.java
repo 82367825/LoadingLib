@@ -6,6 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.zero.loadinglib.AbsAnimLayer;
+import com.zero.loadinglib.util.evaluator.AlphaEvaluator;
+import com.zero.loadinglib.util.evaluator.SizeEvaluator;
+import com.zero.loadinglib.util.interpolator.ReverseInterpolator;
 
 /**
  * 大小圆闪动
@@ -35,8 +38,11 @@ public class SpinKitFlashCircleLayer extends AbsAnimLayer {
     
     private Paint mPaint;
     
-    private CircleAlphaEvaluator mCircleAlphaEvaluator;
-    private CircleRadiusEvaluator mCircleRadiusEvaluator;
+    private SizeEvaluator mSizeEvaluator;
+    private AlphaEvaluator mAlphaEvaluator;
+    private ReverseInterpolator mReverseInterpolator;
+//    private CircleAlphaEvaluator mCircleAlphaEvaluator;
+//    private CircleRadiusEvaluator mCircleRadiusEvaluator;
     
     public SpinKitFlashCircleLayer() {
         mPaint = new Paint();
