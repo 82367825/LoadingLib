@@ -16,7 +16,11 @@ public class RepeatInterpolator implements Interpolator {
     
     public RepeatInterpolator() {
     }
-    
+
+    /**
+     * 设置重复的次数
+     * @param repeatTimes
+     */
     public RepeatInterpolator(int repeatTimes) {
         this.mRepeatTimes = repeatTimes;
     }

@@ -41,15 +41,14 @@ public class SpinKitFlashCircleLayer extends AbsAnimLayer {
     private SizeEvaluator mSizeEvaluator;
     private AlphaEvaluator mAlphaEvaluator;
     private ReverseInterpolator mReverseInterpolator;
-//    private CircleAlphaEvaluator mCircleAlphaEvaluator;
-//    private CircleRadiusEvaluator mCircleRadiusEvaluator;
     
     public SpinKitFlashCircleLayer() {
         mPaint = new Paint();
         mPaint.setColor(mCircleColor);
         mPaint.setAntiAlias(true);
-        mCircleAlphaEvaluator = new CircleAlphaEvaluator();
-        mCircleRadiusEvaluator = new CircleRadiusEvaluator();
+        mAlphaEvaluator = new AlphaEvaluator();
+        mSizeEvaluator = new SizeEvaluator();
+        mReverseInterpolator = new ReverseInterpolator();
     }
     
     @Override
@@ -61,41 +60,15 @@ public class SpinKitFlashCircleLayer extends AbsAnimLayer {
 
     @Override
     protected void onDrawLayer(Canvas canvas, float percent) {
-        mCircleRadius1 = mCircleRadiusEvaluator.evaluate(percent, mCircleMinRadius, 
-                mCircleMaxRadius);
-        mCircleRadius2 = mCircleRadiusEvaluator.evaluate(percent, mCircleMaxRadius, 
-                mCircleMinRadius);
-        mCircleAlpha1 = mCircleAlphaEvaluator.evaluate(percent, mCircleMaxAlpha, mCircleMinAlpha);
-        mCircleAlpha2 = mCircleAlphaEvaluator.evaluate(percent, mCircleMinAlpha, mCircleMaxAlpha);
+        mCircleRadius1 = mSizeEvaluator.evaluate(mReverseInterpolator.getInterpolation(percent), 
+                mCircleMinRadius, mCircleMaxRadius);
+        mCircleRadius2 = mSizeEvaluator.evaluate(mReverseInterpolator.getInterpolation(percent), 
+                mCircleMaxRadius, mCircleMinRadius);
+        mCircleAlpha1 = mAlphaEvaluator.evaluate(percent, mCircleMaxAlpha, mCircleMinAlpha);
+        mCircleAlpha2 = mAlphaEvaluator.evaluate(percent, mCircleMinAlpha, mCircleMaxAlpha);
         mPaint.setAlpha(mCircleAlpha1);
         canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, mCircleRadius1, mPaint);
         mPaint.setAlpha(mCircleAlpha2);
         canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, mCircleRadius2, mPaint);
     }
-    
-    private class CircleAlphaEvaluator implements TypeEvaluator<Integer> {
-
-        @Override
-        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-            if (fraction <= 0.5f) {
-                return (int)(startValue + (endValue - startValue) * fraction * 2);
-            } else {
-                return (int)(endValue + (startValue - endValue) * (fraction - 0.5f) * 2);
-            }
-        }
-    }
-    
-    
-    private class CircleRadiusEvaluator implements TypeEvaluator<Integer> {
-
-        @Override
-        public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-            if (fraction <= 0.5f) {
-                return (int)(startValue + (endValue - startValue) * fraction * 2);
-            } else {
-                return (int)(endValue + (startValue - endValue) * (fraction - 0.5f) * 2);
-            }
-        }
-    }
-    
 }
