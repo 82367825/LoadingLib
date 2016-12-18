@@ -55,7 +55,6 @@ public class SpinKitFlashCircleLayer extends AbsAnimLayer {
     protected void onMeasureLayer(int designWidth, int designHeight) {
         mCenterPoint = new Point(designWidth / 2, designHeight / 2);
         mCircleMaxRadius = designWidth / 5;
-        mCircleMinRadius = designWidth / 35; 
     }
 
     @Override
