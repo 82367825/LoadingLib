@@ -1,7 +1,9 @@
 package com.zero.loadinglib.spinkit;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 
 import com.zero.loadinglib.AbsAnimLayer;
 import com.zero.loadinglib.util.evaluator.SizeEvaluator;
@@ -14,6 +16,7 @@ import com.zero.loadinglib.util.interpolator.ReverseInterpolator;
  */
 public class SpinKitNineSquareLayer extends AbsAnimLayer {
 
+    private static final int DEFAULT_COLOR = 0xff0099cc;
     private Point mCenterPoint;
     private Point[] mPoints;
     private int[] mSquareSizes;
@@ -21,6 +24,15 @@ public class SpinKitNineSquareLayer extends AbsAnimLayer {
     private ReverseInterpolator mReverseInterpolator;
     private ProtrusionsInterpolator[] mProtrusionsInterpolators;
     private SizeEvaluator mSizeEvaluator;
+    private int mColor = DEFAULT_COLOR;
+    
+    private Paint mPaint;
+    
+    public SpinKitNineSquareLayer() {
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setColor(mColor);
+    }
 
     @Override
     protected void onMeasureLayer(int designWidth, int designHeight) {
@@ -55,7 +67,14 @@ public class SpinKitNineSquareLayer extends AbsAnimLayer {
     @Override
     protected void onDrawLayer(Canvas canvas, float percent) {
         for (int i = 0; i < mPoints.length; i++) {
-            mSquareSizes[i] = mReverseInterpolator.getInterpolation()
+            float fraction = mReverseInterpolator.getInterpolation(mProtrusionsInterpolators[i]
+                    .getInterpolation(percent));
+            mSquareSizes[i] = mSizeEvaluator.evaluate(fraction, mMaxSquareSize, 0);
+            Rect rect = new Rect(mPoints[i].x - mSquareSizes[i] / 2, 
+                    mPoints[i].y - mSquareSizes[i] / 2,
+                    mPoints[i].x + mSquareSizes[i] / 2, 
+                    mPoints[i].y + mSquareSizes[i] / 2);
+            canvas.drawRect(rect, mPaint);
         }
     }
 }
