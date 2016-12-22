@@ -13,7 +13,8 @@ public class TransLineEvaluator implements TypeEvaluator<Point> {
     
     @Override
     public Point evaluate(float fraction, Point startValue, Point endValue) {
-        return null;
+        return new Point((int)(startValue.x + fraction * (endValue.x - startValue.x)),
+                (int)(startValue.y + fraction * (endValue.y - startValue.y)));
     }
     
 }

@@ -9,6 +9,7 @@ import android.graphics.Point;
  * @date 16-12-9
  */
 public class TransCircleEvaluator implements TypeEvaluator<Point> {
+    
     @Override
     public Point evaluate(float fraction, Point startValue, Point endValue) {
         return null;
