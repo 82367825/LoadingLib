@@ -38,7 +38,7 @@ public class SpinKitNineSquareLayer extends AbsAnimLayer {
     protected void onMeasureLayer(int designWidth, int designHeight) {
         mMaxSquareSize = (int) (0.08f * designWidth);
         mCenterPoint = new Point(designWidth / 2, designHeight / 2);
-
+        mSquareSizes = new int[9];
         mSizeEvaluator = new SizeEvaluator();
         mReverseInterpolator = new ReverseInterpolator();
         mPoints = new Point[9];
@@ -53,15 +53,18 @@ public class SpinKitNineSquareLayer extends AbsAnimLayer {
         mPoints[7] = new Point(mCenterPoint.x, mCenterPoint.y + mMaxSquareSize);
         mPoints[8] = new Point(mCenterPoint.x + mMaxSquareSize, mCenterPoint.y + mMaxSquareSize);
 
-        mProtrusionsInterpolators[0] = new ProtrusionsInterpolator(0f, 5f);
-        mProtrusionsInterpolators[1] = new ProtrusionsInterpolator(1f, 6f);
-        mProtrusionsInterpolators[3] = new ProtrusionsInterpolator(1f, 6f);
-        mProtrusionsInterpolators[2] = new ProtrusionsInterpolator(2f, 7f);
-        mProtrusionsInterpolators[4] = new ProtrusionsInterpolator(2f, 7f);
-        mProtrusionsInterpolators[6] = new ProtrusionsInterpolator(2f, 7f);
-        mProtrusionsInterpolators[5] = new ProtrusionsInterpolator(3f, 8f);
-        mProtrusionsInterpolators[7] = new ProtrusionsInterpolator(3f, 8f);
-        mProtrusionsInterpolators[8] = new ProtrusionsInterpolator(4f, 9f);
+        //为了增强效果
+        mMaxSquareSize = mMaxSquareSize + 5;
+
+        mProtrusionsInterpolators[0] = new ProtrusionsInterpolator(0f, 0.5f);
+        mProtrusionsInterpolators[1] = new ProtrusionsInterpolator(0.1f, 0.6f);
+        mProtrusionsInterpolators[3] = new ProtrusionsInterpolator(0.1f, 0.6f);
+        mProtrusionsInterpolators[2] = new ProtrusionsInterpolator(0.2f, 0.7f);
+        mProtrusionsInterpolators[4] = new ProtrusionsInterpolator(0.2f, 0.7f);
+        mProtrusionsInterpolators[6] = new ProtrusionsInterpolator(0.2f, 0.7f);
+        mProtrusionsInterpolators[5] = new ProtrusionsInterpolator(0.3f, 0.8f);
+        mProtrusionsInterpolators[7] = new ProtrusionsInterpolator(0.3f, 0.8f);
+        mProtrusionsInterpolators[8] = new ProtrusionsInterpolator(0.4f, 0.9f);
     }
 
     @Override

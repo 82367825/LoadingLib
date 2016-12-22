@@ -17,16 +17,36 @@ public class SpinKitAnimDrawable extends AnimDrawable {
     private static final long ANIM_DURATION = 500;
     
     public static final int TYPE_BOUNCE = 1;
-    public static final int TYPE_CUDE = 2;
-    public static final int TYPE_DOT = 3;
+    public static final int TYPE_NINE_SQUARE = 2;
+    public static final int TYPE_FLASH_CIRCLE = 3;
     public static final int TYPE_SOUND = 4;
     
     private int mCurrentType;
     
+    public SpinKitAnimDrawable setType(int currentType) {
+        this.mCurrentType = currentType;
+        return this;
+    }
+    
     @Override
     protected List<AbsAnimLayer> getAnimLayer() {
         List<AbsAnimLayer> absAnimLayers = new ArrayList<AbsAnimLayer>();
-        absAnimLayers.add(new SpinKitSoundLayer());
+        switch (this.mCurrentType) {
+            case TYPE_BOUNCE:
+                absAnimLayers.add(new SpinKitBounceLayer());
+                break;
+            case TYPE_FLASH_CIRCLE:
+                absAnimLayers.add(new SpinKitFlashCircleLayer());
+                break;
+            case TYPE_NINE_SQUARE:
+                absAnimLayers.add(new SpinKitFlashCircleLayer());
+                break;
+            case TYPE_SOUND:
+                absAnimLayers.add(new SpinKitSoundLayer());
+                break;
+            default:
+                break;
+        }
         return absAnimLayers;
     }
 

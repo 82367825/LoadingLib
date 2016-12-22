@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
         
         <ImageView
-            android:id="@+id/spinkit_beatcircle"
+            android:id="@+id/spinkit_bounce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -19,11 +19,12 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:id="@+id/spinkit_"
+            android:id="@+id/spinkit_ninesquare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <ImageView
+            android:id="@+id/spinkit_sound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         

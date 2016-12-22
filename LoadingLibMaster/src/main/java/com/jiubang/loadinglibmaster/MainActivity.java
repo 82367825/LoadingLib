@@ -1,7 +1,9 @@
 package com.jiubang.loadinglibmaster;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.zero.loadinglib.spinkit.SpinKitAnimDrawable;
@@ -17,10 +19,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SpinKitAnimDrawable spinKitAnimDrawable = new SpinKitAnimDrawable();
-        ImageView imageView = (ImageView) findViewById(R.id.image);
-        imageView.setImageDrawable(spinKitAnimDrawable);
-        spinKitAnimDrawable.startAnim();
+        findViewById(R.id.button_spin_kit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SpinKitActivity.class));
+            }
+        });
     }
     
 }
