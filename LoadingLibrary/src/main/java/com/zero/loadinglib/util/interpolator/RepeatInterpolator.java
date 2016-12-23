@@ -27,7 +27,7 @@ public class RepeatInterpolator implements Interpolator {
     
     @Override
     public float getInterpolation(float input) {
-        float intervalTime = input / mRepeatTimes;
+        float intervalTime = 1f / (float)mRepeatTimes;
         float currentInput = input % intervalTime;
         return currentInput / intervalTime;
     }
