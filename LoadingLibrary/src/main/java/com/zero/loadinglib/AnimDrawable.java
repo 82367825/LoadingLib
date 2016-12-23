@@ -50,7 +50,6 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
     private void initAnimDrawable() {
         mAnimDrawableController = new AnimDrawableController(this);
         mAnimDrawableController.setAnimDuration(getAnimDuration());
-        mAbsAnimLayers = getAnimLayer();
         mDrawableDesignWidth = getDrawableDesignWidth();
         mDrawableDesignHeight = getDrawableDesignHeight();
         if (mDrawableDesignWidth <= 0) {
@@ -60,7 +59,11 @@ public abstract class AnimDrawable extends Drawable implements IAnimDrawable {
             mDrawableDesignHeight = DEFAULT_DRAWABLE_HEIGHT;
         }
         mDrawableAlpha = DEFAULT_DRAWABLE_ALPHA;
-
+        initAnimLayer();
+    }
+    
+    protected void initAnimLayer() {
+        mAbsAnimLayers = getAnimLayer();
         for (AbsAnimLayer absAnimLayer : mAbsAnimLayers) {
             absAnimLayer.onMeasureLayer((int)mDrawableDesignWidth, (int) mDrawableDesignHeight);
         }

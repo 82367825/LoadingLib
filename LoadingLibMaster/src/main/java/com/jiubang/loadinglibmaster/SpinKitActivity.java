@@ -22,16 +22,28 @@ public class SpinKitActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinkit);
         
+        SpinKitAnimDrawable spinKitAnimDrawable = new SpinKitAnimDrawable();
+        spinKitAnimDrawable.setType(SpinKitAnimDrawable.TYPE_BOUNCE);
         mBounceImageView = (ImageView) findViewById(R.id.spinkit_bounce);
-        mBounceImageView.setImageDrawable(new SpinKitAnimDrawable().setType(SpinKitAnimDrawable.TYPE_BOUNCE));
+        mBounceImageView.setImageDrawable(spinKitAnimDrawable);
+        spinKitAnimDrawable.startAnim();
         
+        spinKitAnimDrawable = new SpinKitAnimDrawable();
+        spinKitAnimDrawable.setType(SpinKitAnimDrawable.TYPE_FLASH_CIRCLE);
         mFlashCircleImageView = (ImageView) findViewById(R.id.spinkit_flashcircle);
-        mFlashCircleImageView.setImageDrawable(new SpinKitAnimDrawable().setType(SpinKitAnimDrawable.TYPE_FLASH_CIRCLE));
+        mFlashCircleImageView.setImageDrawable(spinKitAnimDrawable);
+        spinKitAnimDrawable.startAnim();
         
+        spinKitAnimDrawable = new SpinKitAnimDrawable();
+        spinKitAnimDrawable.setType(SpinKitAnimDrawable.TYPE_NINE_SQUARE);
         mNineSquareImageView = (ImageView) findViewById(R.id.spinkit_ninesquare);
-        mNineSquareImageView.setImageDrawable(new SpinKitAnimDrawable().setType(SpinKitAnimDrawable.TYPE_NINE_SQUARE));
-        
+        mNineSquareImageView.setImageDrawable(spinKitAnimDrawable);
+        spinKitAnimDrawable.startAnim();
+
+        spinKitAnimDrawable = new SpinKitAnimDrawable();
+        spinKitAnimDrawable.setType(SpinKitAnimDrawable.TYPE_SOUND); 
         mSoundImageView = (ImageView) findViewById(R.id.spinkit_sound);
-        mSoundImageView.setImageDrawable(new SpinKitAnimDrawable().setType(SpinKitAnimDrawable.TYPE_SOUND));
+        mSoundImageView.setImageDrawable(spinKitAnimDrawable);
+        spinKitAnimDrawable.startAnim();
     }
 }

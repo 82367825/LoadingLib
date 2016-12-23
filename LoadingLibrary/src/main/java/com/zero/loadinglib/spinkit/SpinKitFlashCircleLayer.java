@@ -18,7 +18,7 @@ public class SpinKitFlashCircleLayer extends AbsAnimLayer {
 
     private static final int DEFAULT_COLOR = 0xff0099cc;
     private static final int DEFAULT_MAX_RADIUS = 150;
-    private static final int DEFAULT_MIN_RADIUS = 20;
+    private static final int DEFAULT_MIN_RADIUS = 5;
     private static final int DEFAULT_RADIUS = 50;
     private static final int DEFAULT_ALPHA = 100;
     private static final int DEFAULT_MAX_ALPHA = 200;

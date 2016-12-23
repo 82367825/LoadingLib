@@ -23,9 +23,9 @@ public class SpinKitAnimDrawable extends AnimDrawable {
     
     private int mCurrentType;
     
-    public SpinKitAnimDrawable setType(int currentType) {
+    public void setType(int currentType) {
         this.mCurrentType = currentType;
-        return this;
+        super.initAnimLayer();
     }
     
     @Override
@@ -39,7 +39,7 @@ public class SpinKitAnimDrawable extends AnimDrawable {
                 absAnimLayers.add(new SpinKitFlashCircleLayer());
                 break;
             case TYPE_NINE_SQUARE:
-                absAnimLayers.add(new SpinKitFlashCircleLayer());
+                absAnimLayers.add(new SpinKitNineSquareLayer());
                 break;
             case TYPE_SOUND:
                 absAnimLayers.add(new SpinKitSoundLayer());
