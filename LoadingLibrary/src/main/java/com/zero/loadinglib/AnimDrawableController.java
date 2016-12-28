@@ -26,8 +26,8 @@ public class AnimDrawableController implements ValueAnimator.AnimatorUpdateListe
         mDrawableValueAnimator = ValueAnimator.ofFloat(0f, 1f);
         mDrawableValueAnimator.setInterpolator(new LinearInterpolator());
         mDrawableValueAnimator.setDuration(mAnimDuration);
-        mDrawableValueAnimator.setRepeatCount(Animation.INFINITE);
-        mDrawableValueAnimator.setRepeatMode(Animation.RESTART);
+        mDrawableValueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        mDrawableValueAnimator.setRepeatMode(ValueAnimator.RESTART);
         mDrawableValueAnimator.addUpdateListener(this);
     }
 
