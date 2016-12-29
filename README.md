@@ -19,7 +19,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 ```
 	dependencies {
-	        compile 'com.github.82367825:LoadingLib:v1.0.0'
+	        compile 'com.github.82367825:LoadingLib:v1.1.0'
 	}
 ```
 
@@ -39,7 +39,7 @@ Step 2. Add the dependency
 	<dependency>
 	    <groupId>com.github.82367825</groupId>
 	    <artifactId>LoadingLib</artifactId>
-	    <version>v1.0.0</version>
+	    <version>v1.1.0</version>
 	</dependency>
 ```
 
